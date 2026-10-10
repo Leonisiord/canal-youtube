@@ -1,0 +1,99 @@
+{
+  "_comentario": "Nichos candidatos compatibles con animación de recortes. Cada nicho tiene una consulta 'general' y otra 'animado' por idioma. Cambiar una consulta invalida su caché (gasta cuota nueva).",
+  "dias_atras": 90,
+  "duracion_min_s": 600,
+  "duracion_max_s": 1800,
+  "duraciones_api": ["medium", "long"],
+  "orden": "viewCount",
+  "canales_frecuencia_por_combo": 15,
+  "nichos": [
+    {
+      "id": "terror",
+      "nombre": "Historias de terror",
+      "consultas": {
+        "es": {"general": "historias de terror", "animado": "historias de terror animadas"},
+        "en": {"general": "horror stories", "animado": "horror stories animated"}
+      }
+    },
+    {
+      "id": "historia",
+      "nombre": "Historia (documental)",
+      "consultas": {
+        "es": {"general": "documental de historia", "animado": "historia animada documental"},
+        "en": {"general": "history documentary", "animado": "animated history documentary"}
+      }
+    },
+    {
+      "id": "misterios",
+      "nombre": "Misterios sin resolver",
+      "consultas": {
+        "es": {"general": "misterios sin resolver", "animado": "misterios sin resolver animado"},
+        "en": {"general": "unsolved mysteries", "animado": "unsolved mysteries animated"}
+      }
+    },
+    {
+      "id": "true_crime",
+      "nombre": "Crímenes reales (true crime)",
+      "consultas": {
+        "es": {"general": "casos criminales reales", "animado": "casos criminales reales animado"},
+        "en": {"general": "true crime case", "animado": "true crime animated"}
+      }
+    },
+    {
+      "id": "mitologia",
+      "nombre": "Mitología",
+      "consultas": {
+        "es": {"general": "mitología explicada", "animado": "mitología animada"},
+        "en": {"general": "mythology explained", "animado": "mythology animated"}
+      }
+    },
+    {
+      "id": "libros",
+      "nombre": "Resúmenes de libros",
+      "consultas": {
+        "es": {"general": "resumen del libro", "animado": "resumen animado del libro"},
+        "en": {"general": "book summary", "animado": "animated book summary"}
+      }
+    },
+    {
+      "id": "ciencia",
+      "nombre": "Ciencia / explicadores ('qué pasaría si')",
+      "consultas": {
+        "es": {"general": "qué pasaría si ciencia", "animado": "ciencia explicada animación"},
+        "en": {"general": "what if science", "animado": "science explained animation"}
+      }
+    },
+    {
+      "id": "finanzas",
+      "nombre": "Finanzas personales",
+      "consultas": {
+        "es": {"general": "finanzas personales", "animado": "finanzas personales animado"},
+        "en": {"general": "personal finance", "animado": "personal finance animated"}
+      }
+    },
+    {
+      "id": "psicologia",
+      "nombre": "Psicología explicada",
+      "consultas": {
+        "es": {"general": "psicología explicada", "animado": "psicología animada"},
+        "en": {"general": "psychology explained", "animado": "animated psychology"}
+      }
+    },
+    {
+      "id": "negocios",
+      "nombre": "Historias de empresas y biografías",
+      "consultas": {
+        "es": {"general": "historia de la empresa", "animado": "historia de empresas animada"},
+        "en": {"general": "business story documentary", "animado": "animated business story"}
+      }
+    },
+    {
+      "id": "historias_vida",
+      "nombre": "Historias de vida animadas (storytime)",
+      "consultas": {
+        "es": {"general": "mi historia animada", "animado": "historias animadas de la vida real"},
+        "en": {"general": "my story animated", "animado": "animated true story"}
+      }
+    }
+  ]
+}
