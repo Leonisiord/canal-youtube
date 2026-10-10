@@ -1,0 +1,117 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "storyboard.schema.json",
+  "title": "Storyboard de un episodio",
+  "description": "Lo genera el LLM a partir del guion aprobado. Los campos marcados como 'rellena el pipeline' llegan vacíos o a null y se calculan después del TTS.",
+  "type": "object",
+  "required": ["episodio", "idioma", "titulo_trabajo", "duracion_objetivo_min", "reparto", "escenas"],
+  "additionalProperties": false,
+  "properties": {
+    "episodio": {"type": "string", "pattern": "^ep\\d{3}$"},
+    "idioma": {"enum": ["es", "en"]},
+    "titulo_trabajo": {"type": "string", "maxLength": 100},
+    "duracion_objetivo_min": {"type": "number", "minimum": 8, "maximum": 25},
+    "reparto": {
+      "description": "IDs definidos en config/reparto.yaml (rig, voz, colores). 'narrador' puede estar fuera de pantalla.",
+      "type": "array", "items": {"type": "string"}, "minItems": 1, "uniqueItems": true
+    },
+    "escenas": {"type": "array", "minItems": 1, "items": {"$ref": "#/$defs/escena"}}
+  },
+  "$defs": {
+    "escena": {
+      "type": "object",
+      "required": ["id", "fondo", "camara", "personajes", "lineas"],
+      "additionalProperties": false,
+      "properties": {
+        "id": {"type": "string", "pattern": "^s\\d{2,3}$"},
+        "acto": {"type": "integer", "minimum": 1},
+        "fondo": {
+          "type": "object",
+          "required": ["id", "prompt"],
+          "additionalProperties": false,
+          "properties": {
+            "id": {"type": "string", "pattern": "^[a-z0-9_]+$", "description": "Si ya existe en assets/fondos/ se reutiliza y no se genera."},
+            "prompt": {"type": "string", "description": "Solo el contenido; el estilo fijo lo añade config/estilo.json."},
+            "hora": {"enum": ["dia", "atardecer", "noche"]}
+          }
+        },
+        "camara": {
+          "type": "object",
+          "required": ["tipo"],
+          "additionalProperties": false,
+          "properties": {
+            "tipo": {"enum": ["estatica", "zoom_lento", "zoom_rapido", "paneo_izq", "paneo_der", "primer_plano_hablante", "sacudida"]},
+            "zoom_inicio": {"type": "number", "minimum": 1.0, "maximum": 2.0, "default": 1.0},
+            "zoom_fin": {"type": "number", "minimum": 1.0, "maximum": 2.0, "default": 1.06},
+            "foco": {"type": "string", "description": "id de personaje o 'centro'"}
+          }
+        },
+        "musica": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "ambiente": {"enum": ["tension", "misterio", "calma", "alegre", "triste", "epico", "silencio"]},
+            "volumen_db": {"type": "number", "maximum": 0, "default": -20}
+          }
+        },
+        "personajes": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": ["id", "posicion"],
+            "additionalProperties": false,
+            "properties": {
+              "id": {"type": "string"},
+              "posicion": {"enum": ["izquierda", "centro_izquierda", "centro", "centro_derecha", "derecha"]},
+              "escala": {"type": "number", "minimum": 0.4, "maximum": 2.0, "default": 1.0},
+              "mirando": {"enum": ["izquierda", "derecha", "camara"]},
+              "movimiento": {"enum": ["quieto", "entra_izq", "entra_der", "sale_izq", "sale_der", "camina_izq", "camina_der", "salta"], "default": "quieto"},
+              "expresion_inicial": {"$ref": "#/$defs/expresion"}
+            }
+          }
+        },
+        "lineas": {"type": "array", "minItems": 1, "items": {"$ref": "#/$defs/linea"}},
+        "transicion_salida": {"enum": ["corte", "fundido", "fundido_negro"], "default": "corte"},
+        "duracion_estimada_s": {"type": "number", "description": "Estimación por nº de palabras; la real sale del audio."}
+      }
+    },
+    "linea": {
+      "type": "object",
+      "required": ["id", "personaje", "texto", "expresion"],
+      "additionalProperties": false,
+      "properties": {
+        "id": {"type": "string", "pattern": "^s\\d{2,3}_l\\d{2,3}$"},
+        "personaje": {"type": "string", "description": "id del reparto; su voz sale de config/reparto.yaml"},
+        "texto": {"type": "string", "minLength": 1, "maxLength": 400},
+        "expresion": {"$ref": "#/$defs/expresion"},
+        "intensidad_voz": {"type": "number", "minimum": 0, "maximum": 1, "default": 0.5, "description": "Emoción del TTS (exaggeration en Chatterbox)."},
+        "gesto": {"enum": ["ninguno", "senalar", "brazos_arriba", "mano_barbilla", "encogerse", "saludar", "puno", "manos_cara"], "default": "ninguno"},
+        "mirada": {"type": "string", "description": "'camara', 'izquierda', 'derecha', 'arriba', 'abajo' o id de personaje", "default": "camara"},
+        "reacciones": {
+          "type": "array",
+          "description": "Expresión de los oyentes mientras habla este personaje.",
+          "items": {
+            "type": "object",
+            "required": ["personaje", "expresion"],
+            "additionalProperties": false,
+            "properties": {"personaje": {"type": "string"}, "expresion": {"$ref": "#/$defs/expresion"}}
+          }
+        },
+        "sfx": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": ["id"],
+            "additionalProperties": false,
+            "properties": {"id": {"type": "string"}, "desfase_s": {"type": "number", "default": 0}}
+          }
+        },
+        "pausa_despues_s": {"type": "number", "minimum": 0, "maximum": 5, "default": 0.35},
+        "audio": {"type": ["string", "null"], "description": "rellena el pipeline"},
+        "duracion_s": {"type": ["number", "null"], "description": "rellena el pipeline"},
+        "visemas": {"type": ["string", "null"], "description": "rellena el pipeline (ruta al JSON de Rhubarb)"}
+      }
+    },
+    "expresion": {"enum": ["neutral", "feliz", "triste", "enfadado", "sorprendido", "asustado", "pensativo", "preocupado", "sospecha"]}
+  }
+}

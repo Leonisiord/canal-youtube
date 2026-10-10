@@ -1,0 +1,77 @@
+{
+  "_comentario": "Notas 1-5 (5 = mejor) que NO salen de la API: son juicio razonado, con el motivo al lado. 'riesgo' en positivo: 5 = riesgo de monetización bajo.",
+  "pesos": {
+    "demanda": 0.25,
+    "oportunidad": 0.20,
+    "rpm": 0.20,
+    "encaje": 0.15,
+    "guiones": 0.10,
+    "riesgo": 0.10
+  },
+  "pesos_alternativos": {
+    "solo_datos": {"demanda": 0.35, "oportunidad": 0.35, "rpm": 0.30, "encaje": 0, "guiones": 0, "riesgo": 0},
+    "pipeline": {"demanda": 0.15, "oportunidad": 0.15, "rpm": 0.10, "encaje": 0.30, "guiones": 0.15, "riesgo": 0.15}
+  },
+  "factor_rpm_idioma": {
+    "en": 1.0,
+    "es": 0.20,
+    "_fuente": "AIR Media-Tech (01-04-2026, datos de 3.000 canales): CPM inglés 13-20 USD vs español 1,10-5,61 USD -> ratio de puntos medios 3,36/16,5 = 0,20. Contraste: Lenostube (02-04-2026) RPM España 3,91, México 0,62, Argentina 0,56, Colombia 0,57 vs EE. UU. 10,81; FluxNote (2026) RPM España 3,00-5,50 vs EE. UU. 7,50-12,00. Rango plausible del factor: 0,06 (audiencia casi toda LatAm) a 0,44 (audiencia casi toda de España)."
+  },
+  "nichos": {
+    "terror": {
+      "encaje": 5, "encaje_por": "Fondos atmosféricos estáticos + narrador + 2-3 personajes por historia; formato ya probado en canales de terror animado.",
+      "guiones": 4, "guiones_por": "Ficción original: sin riesgo de hechos falsos. Hay que evitar copiar creepypastas con derechos.",
+      "riesgo": 3, "riesgo_por": "Violencia o gore explícito = anuncios limitados; anunciantes evitan terror (RPM bajo); nicho saturado de 'AI slop'."
+    },
+    "historia": {
+      "encaje": 4, "encaje_por": "Funciona bien, pero cada época pide vestuario y personajes nuevos (más trabajo de assets).",
+      "guiones": 3, "guiones_por": "Fuentes abundantes, pero el LLM inventa fechas y citas: requiere verificación de hechos en cada vídeo.",
+      "riesgo": 4, "riesgo_por": "Guerras y violencia histórica se toleran en contexto educativo; riesgo bajo."
+    },
+    "misterios": {
+      "encaje": 4, "encaje_por": "Fondos de lugares + narrador + pocos personajes; cast fijo de 'investigadores' posible.",
+      "guiones": 3, "guiones_por": "Mezcla hechos y especulación: hay que separar lo documentado de las teorías.",
+      "riesgo": 4, "riesgo_por": "Bajo, salvo casos con víctimas reales recientes."
+    },
+    "true_crime": {
+      "encaje": 3, "encaje_por": "Muchos personajes reales distintos por caso; el cast fijo no encaja; tema delicado en dibujo cómico.",
+      "guiones": 2, "guiones_por": "Víctimas y acusados reales: riesgo de difamación y de errores factuales graves.",
+      "riesgo": 2, "riesgo_por": "Violencia real y eventos sensibles = anuncios limitados frecuentes."
+    },
+    "mitologia": {
+      "encaje": 3, "encaje_por": "Cada mito exige dioses y criaturas nuevos: el cast fijo no se reutiliza bien.",
+      "guiones": 4, "guiones_por": "Mitos de dominio público y bien documentados; poco riesgo factual.",
+      "riesgo": 4, "riesgo_por": "Bajo; cuidado con violencia o sexualidad explícita de algunos mitos."
+    },
+    "libros": {
+      "encaje": 5, "encaje_por": "Un cast fijo de arquetipos ilustra ideas en situaciones cotidianas: reutilización máxima.",
+      "guiones": 3, "guiones_por": "El LLM puede atribuir al libro ideas que no contiene; además no se debe reproducir el texto.",
+      "riesgo": 3, "riesgo_por": "Formato muy saturado de vídeos IA genéricos: riesgo de 'contenido no auténtico' si no hay opinión propia."
+    },
+    "ciencia": {
+      "encaje": 4, "encaje_por": "Cast fijo que reacciona a escenarios ('qué pasaría si'); fondos variados pero genéricos.",
+      "guiones": 3, "guiones_por": "Hechos verificables; el LLM exagera cifras: hay que verificar.",
+      "riesgo": 4, "riesgo_por": "Bajo."
+    },
+    "finanzas": {
+      "encaje": 4, "encaje_por": "Cast fijo en situaciones cotidianas (nómina, deudas, inversión).",
+      "guiones": 2, "guiones_por": "Tema delicado: el consejo depende del país, la fiscalidad cambia y un error causa daño real.",
+      "riesgo": 4, "riesgo_por": "RPM alto y apto para anunciantes; riesgo de desinformación financiera si se dan consejos concretos."
+    },
+    "psicologia": {
+      "encaje": 5, "encaje_por": "Situaciones cotidianas con cast fijo: el formato ideal para personajes reutilizados.",
+      "guiones": 3, "guiones_por": "Riesgo de pseudociencia o de afirmaciones de salud: hay que citar estudios.",
+      "riesgo": 4, "riesgo_por": "Bajo si no se dan consejos médicos."
+    },
+    "negocios": {
+      "encaje": 3, "encaje_por": "Fundadores reales distintos en cada vídeo: muchos personajes nuevos.",
+      "guiones": 3, "guiones_por": "Hechos verificables (fechas, cifras); riesgo de errores.",
+      "riesgo": 4, "riesgo_por": "Bajo; temática apta para anunciantes."
+    },
+    "historias_vida": {
+      "encaje": 5, "encaje_por": "Es literalmente el formato de recortes con cast fijo.",
+      "guiones": 4, "guiones_por": "Ficción fácil de generar, pero venderla como 'historia real' sería engañoso.",
+      "riesgo": 2, "riesgo_por": "La política prohíbe 'personajes en la misma situación una y otra vez con el mismo desenlace'; además la audiencia joven puede llevar a 'hecho para niños' (sin anuncios personalizados ni comentarios)."
+    }
+  }
+}

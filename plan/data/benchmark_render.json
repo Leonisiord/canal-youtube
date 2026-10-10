@@ -1,0 +1,8 @@
+{
+  "frames": 300,
+  "segundos_video": 10,
+  "segundos_reloj": 28.22,
+  "fps_render": 10.6,
+  "minutos_para_video_15min": 42.3,
+  "config": "1920x1080@30, 3 personajes x 12 capas, zoom de c\u00e1mara, Pillow + libx264, 1 proceso"
+}
