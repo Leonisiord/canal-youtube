@@ -1,0 +1,8 @@
+.env
+client_secret*.json
+token*.json
+__pycache__/
+.venv/
+plan/data/raw/
+output/
+models/
